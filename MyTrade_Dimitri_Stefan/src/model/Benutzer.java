@@ -1,12 +1,13 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Benutzer {
 	private int benutzerid;
 	private String name;
 	private String passwortHash;
 	private int rolle; 
-	private ArrayList = new ArrayList<Aktie>();
-	
+	private ArrayList<Aktie> aktienListe = new ArrayList<Aktie>();
 	public int getBenutzerid() {
 		return benutzerid;
 	}
@@ -36,6 +37,12 @@ public class Benutzer {
 	}
 	public void setKontostand(double kontostand) {
 		this.kontostand = kontostand;
+	}
+	public ArrayList<Aktie> getAktienListe() {
+		return aktienListe;
+	}
+	public void setAktienListe(ArrayList<Aktie> aktienListe) {
+		this.aktienListe = aktienListe;
 	}
 	private double kontostand;
 
