@@ -7,13 +7,11 @@ import db.connectionPooling.*;
 
 import javax.naming.NoPermissionException;
 
-
 import model.Verkauf;
 
 public class VerkaufDAO extends AbstractDAO {
 	Connection c;
-	PersonDAO personDAO = new PersonDAO();
-	
+	BenutzerDAO benutzerDAO = new BenutzerDAO();
 
 	public VerkaufDAO() throws SQLException {
 		try {
@@ -33,8 +31,8 @@ public class VerkaufDAO extends AbstractDAO {
 			while (rs.next()) {
 				Verkauf verkauf = new Verkauf();
 				verkauf.setVerkaufsid(rs.getInt(1));
-				//verkauf.setAktie(rs.(2));
-				verkauf.setBenutzer(personDAO.findPerson(rs.getInt(3)));
+				// verkauf.setAktie(rs.(2));
+				verkauf.setBenutzer(benutzerDAO.findPerson(rs.getInt(3)));
 				verkauf.setPreis(rs.getDouble(4));
 				verkaufsListe.add(verkauf);
 			}
@@ -52,8 +50,8 @@ public class VerkaufDAO extends AbstractDAO {
 		if (rs.next()) {
 			Verkauf verkauf = new Verkauf();
 			verkauf.setVerkaufsid(rs.getInt(1));
-			//verkauf.setAktie(rs.(2));
-			verkauf.setBenutzer(personDAO.findPerson(rs.getInt(3)));
+			// verkauf.setAktie(rs.(2));
+			verkauf.setBenutzer(benutzerDAO.findPerson(rs.getInt(3)));
 			verkauf.setPreis(rs.getDouble(4));
 			return verkauf;
 		} else {
@@ -65,23 +63,23 @@ public class VerkaufDAO extends AbstractDAO {
 	public Verkauf insertVerkauf(Verkauf verkauf) throws SQLException {
 		Statement stm = c.createStatement();
 		int numero;
-		numero = stm.executeUpdate(
-				"INSERT INTO `mytrade`.`tbl_verkauf`(`aktien_fk`,`benutzer_fk`,`preis`)VALUES ("
-						+ benutzer.getName() + "', '" + benutzer.getPasswortHash() + "', " + benutzer.getRolle() + ", "
-						+ benutzer.getKontostand() + ")",
-				Statement.RETURN_GENERATED_KEYS);
+		numero = stm.executeUpdate("INSERT INTO `mytrade`.`tbl_verkauf`(`aktien_fk`,`benutzer_fk`,`preis`)VALUES ("
+				+ verkauf.getAktie().getId() + ", " + verkauf.getBenutzer().getBenutzerid() + ", " + verkauf.getPreis()
+				+ ")", Statement.RETURN_GENERATED_KEYS);
 		c.commit();
-		benutzer.setBenutzerid(numero);
-		return benutzer;
+		verkauf.setVerkaufsid(numero);
+		;
+		return verkauf;
 	}
 
 	public Verkauf updatePerson(Verkauf verkauf) throws SQLException {
 		Statement stm = c.createStatement();
-		String sql = "UPDATE `mytrade`.`tbl_verkauf` SET " + "`benutzername` = " + benutzer.getBenutzerid()
-				+ ", `passwort_hash` = '" + benutzer.getName() + "'" + ", `rolle` = " + benutzer.getRolle()
-				+ ", `kontostand` = " + benutzer.getKontostand() + " WHERE `benutzer_pk` = " + benutzer.getBenutzerid();
+		String sql = "UPDATE `mytrade`.`tbl_verkauf` SET " + ", `verkauf_pk` = " + verkauf.getVerkaufsid()
+				+ "`benutzer_fk` = " + verkauf.getBenutzer().getBenutzerid() + ", `aktien_fk` = "
+				+ verkauf.getAktie().getId() + ", `preis` = " + verkauf.getPreis() + " WHERE `verkauf_pk` = "
+				+ verkauf.getVerkaufsid();
 		stm.executeUpdate(sql);
 		c.commit();
-		return benutzer;
+		return verkauf;
 	}
 }

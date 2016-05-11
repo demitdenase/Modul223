@@ -5,6 +5,8 @@ public class Benutzer {
 	private String name;
 	private String passwortHash;
 	private int rolle; 
+	private ArrayList = new ArrayList<Aktie>();
+	
 	public int getBenutzerid() {
 		return benutzerid;
 	}

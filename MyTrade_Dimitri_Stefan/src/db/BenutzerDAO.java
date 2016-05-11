@@ -9,10 +9,10 @@ import javax.naming.NoPermissionException;
 
 import model.Benutzer;
 
-public class PersonDAO extends AbstractDAO {
+public class BenutzerDAO extends AbstractDAO {
 	Connection c;
 
-	public PersonDAO() throws SQLException {
+	public BenutzerDAO() throws SQLException {
 		try {
 			c = ConnectionPoolingImplementation.getInstance().getConnection();
 		} catch (NoPermissionException e) {
