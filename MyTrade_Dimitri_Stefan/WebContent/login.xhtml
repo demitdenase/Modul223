@@ -5,15 +5,35 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<head>
-<meta charset="ISO-8859-1" />
-<title>Test</title>
-</head>
+<h:head>
+	<meta charset="utf-8" />
+	<title>MyTrade V1 Dimitri und Stefan</title>
+</h:head>
 <body>
 
-	<h:form>
-	<p:growl id="growl" life="2000" />
-			<p:commandButton value="Ajax Submit" id="ajax" update="growl" actionListener="#{buttonView.buttonAction}" styleClass="ui-priority-primary" />
-	</h:form>
+	<h1>MyTrade</h1>
+	<h2>Login</h2>
+
+<h:form>
+    <p:panel header="Validate">
+        <p:messages autoUpdate="true"/>
+ 
+        <h:panelGrid id="grid" columns="4" cellpadding="5">
+            <h:outputLabel for="name" value="Name:" style="font-weight:bold"/>                    
+            <p:inputText id="name" value="#{validationView.text}" required="true" label="Name"/>
+            <p:message for="name" />
+            <h:outputText value="#{validationView.text}" />
+ 
+             <h:outputLabel for="pwd" value="Name:" style="font-weight:bold"/>                    
+            <p:inputText id="pwd" value="#{validationView.text}" required="true" label="Passwort"/>
+            <p:message for="pwd" />
+            <h:outputText value="#{validationView.text}" />
+
+        </h:panelGrid>
+ 
+        <p:commandButton value="Ajax" update="grid" icon="ui-icon-check" validateClient="true" style="margin-right:10px"/>
+    </p:panel>
+</h:form>
+
 </body>
 </html>
