@@ -1,5 +1,5 @@
 package db;
 
-public class AktieDAO {
+public class AktieDAO extends AbstractDAO {
 
 }

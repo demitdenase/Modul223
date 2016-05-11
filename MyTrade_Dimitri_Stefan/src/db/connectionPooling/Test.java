@@ -44,9 +44,9 @@ public class Test {
 
 		//remark: c1 is still active
 		Statement st = c1.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM `Ort`");
+		ResultSet rs = st.executeQuery("SELECT * FROM `tbl_aktien`");
 		while(rs.next()) {
-			System.out.println(rs.getString("Ortsname"));
+			System.out.println(rs.getString("name"));
 		}
 	}
 	

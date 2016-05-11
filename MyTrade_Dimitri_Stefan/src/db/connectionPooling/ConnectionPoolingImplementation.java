@@ -27,11 +27,11 @@ public class ConnectionPoolingImplementation implements ConnectionPooling {
 	// TODO: Dependency inject (Property file)
 	final String treiberName   = "com.mysql.jdbc.Driver";
 	// TODO: Property file
-	final String connectionURL = "jdbc:mysql://192.168.10.20/PersonOrt"; 
+	final String connectionURL = "jdbc:mysql://192.168.1.78/mytrade"; 
 
 	// TODO: Security: store username and pwd externally
-	private String myUserName    = "MyUsername";
-	private String myPassword    = "MyPassword";
+	private String myUserName    = "Baller";
+	private String myPassword    = "Lernende123.";
 
 
 	private ConnectionPoolingImplementation(int min, int max) throws ClassNotFoundException, SQLException {
