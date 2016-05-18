@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--
+	Author:	Omar Shawahne
+	Date:	18.05.2016 
+ -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Übersicht Admin</title>
+</h:head>
+<body>
+	<p:tabView>
+	
+	
+		<p:tab title="Administration">
+		<p:outputLabel  value="Aktienerfassen"  style="font-size:30px"/>
+		<h:form>
+			<h:panelGrid id="grid" columns="2" cellpadding="5">
+					
+					<h:outputLabel for="fieldName" value="Name" style="font-weight:bold" />
+					<p:inputText id="fieldName" value="#{aktienFormBean.name}">
+						<f:validateLength minimum="3" maximum="20" />
+						<f:validateRegex pattern="[a-zA-Z]*" />
+					</p:inputText>
+
+					<h:outputLabel for="fieldKuerzel" value="Kürzel" style="font-weight:bold"/>
+					<p:inputText id="fieldKuerzel" value="#{aktienFormBean.kuerzel}">
+						<f:validateLength minimum="4" maximum="4" />
+						<f:validateRegex pattern="[a-zA-Z]*" />
+					</p:inputText>
+
+					<h:outputLabel for="fieldPreis" value="Normalpreis (CHF)" style="font-weight:bold" />
+					<p:inputText id="fieldPreis" value="#{aktienFormBean.nominalpreis}">
+						<f:validateDoubleRange minimum="0.0" maximum="5000.0" />
+					</p:inputText>
+
+					<h:outputLabel for="fieldDividende" value="Dividende" style="font-weight:bold"/>
+					<p:inputText id="fieldDividende"
+						value="#{aktienFormBean.dividende}">
+						<f:validateDoubleRange minimum="0.0" maximum="50.0" />
+					</p:inputText>
+
+					<h:outputLabel for="fieldAnzahl" value="Stückanzahl" style="font-weight:bold"/>
+					<p:inputText id="fieldAnzahl" value="#{aktienFormBean.anzahl}">
+						<f:validateLongRange minimum="1" maximum="100" />
+					</p:inputText>
+
+			</h:panelGrid>
+			
+				<p:commandButton value="Zurück" action="#{aktienFormBean.back}"
+					ajax="false" />
+				<p:commandButton value="weiter" action="#{aktienFormBean.next}"
+					ajax="false" />
+				
+				<p:messages for="fieldName" style="color:red;margin:8px;" />
+				<p:messages for="fieldKuerzel" style="color:red;margin:8px;" />
+				<p:messages for="fieldPreis" style="color:red;margin:8px;" />
+				<p:messages for="fieldDividende" style="color:red;margin:8px;" />
+				<p:messages for="fieldAnzahl" style="color:red;margin:8px;" />
+				
+			</h:form>
+		</p:tab>
+
+		<p:tab title="Username?">
+			<h:form>
+				<p>Wollen Sie sich abmelden?</p>
+			</h:form>
+		</p:tab>
+	</p:tabView>
+
+</body>
+</html>
+
+
