@@ -26,7 +26,7 @@ public class BenutzerDAO extends AbstractDAO {
 		try {
 
 			Statement stm = c.createStatement();
-			ResultSet rs = stm.executeQuery("SELECT * FROM tbl_benutzer");
+			ResultSet rs = stm.executeQuery("SELECT * FROM `mytrade`.`tbl_benutzer`");
 			while (rs.next()) {
 				Benutzer benutzer = new Benutzer();
 				benutzer.setBenutzerid(rs.getInt(1));
@@ -46,7 +46,23 @@ public class BenutzerDAO extends AbstractDAO {
 
 	public Benutzer findPerson(int benutzerId) throws SQLException {
 		Statement stm = c.createStatement();
-		ResultSet rs = stm.executeQuery("SELECT * FROM tbl_benutzer WHERE Person_ID= " + benutzerId);
+		ResultSet rs = stm.executeQuery("SELECT * FROM `mytrade`.`tbl_benutzer` WHERE benutzer_pk= " + benutzerId);
+		if (rs.next()) {
+			Benutzer benutzer = new Benutzer();
+			benutzer.setBenutzerid(rs.getInt(1));
+			benutzer.setName(rs.getString(2));
+			benutzer.setPasswortHash(rs.getString(3));
+			benutzer.setRolle(rs.getInt(4));
+			benutzer.setKontostand(rs.getDouble(5));
+			return benutzer;
+		} else {
+			return null;
+		}
+
+	}
+	public Benutzer loginPersonExists(String username,String passwortHash) throws SQLException {
+		Statement stm = c.createStatement();
+		ResultSet rs = stm.executeQuery("SELECT * FROM `mytrade`.`tbl_benutzer` WHERE `benutzername`= '" + username +"' AND `passwort_hash`= '" + passwortHash +"'");
 		if (rs.next()) {
 			Benutzer benutzer = new Benutzer();
 			benutzer.setBenutzerid(rs.getInt(1));
@@ -76,8 +92,8 @@ public class BenutzerDAO extends AbstractDAO {
 
 	public Benutzer updatePerson(Benutzer benutzer) throws SQLException {
 		Statement stm = c.createStatement();
-		String sql = "UPDATE `mytrade`.`tbl_benutzer` SET " + "`benutzername` = " + benutzer.getBenutzerid()
-				+ ", `passwort_hash` = '" + benutzer.getName() + "'" + ", `rolle` = " + benutzer.getRolle()
+		String sql = "UPDATE `mytrade`.`tbl_benutzer` SET " + "`benutzername` = " + benutzer.getName()
+				+ ", `passwort_hash` = '" + benutzer.getPasswortHash() + "'" + ", `rolle` = " + benutzer.getRolle()
 				+ ", `kontostand` = " + benutzer.getKontostand() + " WHERE `benutzer_pk` = " + benutzer.getBenutzerid();
 		stm.executeUpdate(sql);
 		c.commit();

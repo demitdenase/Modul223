@@ -6,7 +6,7 @@ public class Benutzer {
 	private int benutzerid;
 	private String name;
 	private String passwortHash;
-	private int rolle; 
+	private int rolle; //1 == admin 2 == Händler
 	private ArrayList<Aktie> aktienListe = new ArrayList<Aktie>();
 	public int getBenutzerid() {
 		return benutzerid;

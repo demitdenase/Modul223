@@ -12,6 +12,7 @@ import model.Verkauf;
 public class VerkaufDAO extends AbstractDAO {
 	Connection c;
 	BenutzerDAO benutzerDAO = new BenutzerDAO();
+	AktieDAO aktieDAO = new AktieDAO();
 
 	public VerkaufDAO() throws SQLException {
 		try {
@@ -31,7 +32,7 @@ public class VerkaufDAO extends AbstractDAO {
 			while (rs.next()) {
 				Verkauf verkauf = new Verkauf();
 				verkauf.setVerkaufsid(rs.getInt(1));
-				// verkauf.setAktie(rs.(2));
+			    verkauf.setAktie(aktieDAO.findAktie(rs.getInt(2)));;
 				verkauf.setBenutzer(benutzerDAO.findPerson(rs.getInt(3)));
 				verkauf.setPreis(rs.getDouble(4));
 				verkaufsListe.add(verkauf);
@@ -46,7 +47,7 @@ public class VerkaufDAO extends AbstractDAO {
 
 	public Verkauf findVerkauf(int verkaufsId) throws SQLException {
 		Statement stm = c.createStatement();
-		ResultSet rs = stm.executeQuery("SELECT * FROM tbl_verkauf WHERE Person_ID= " + verkaufsId);
+		ResultSet rs = stm.executeQuery("SELECT * FROM tbl_verkauf WHERE `verkauf_pk`= " + verkaufsId);
 		if (rs.next()) {
 			Verkauf verkauf = new Verkauf();
 			verkauf.setVerkaufsid(rs.getInt(1));
