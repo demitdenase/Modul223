@@ -13,6 +13,7 @@ import javax.naming.NoPermissionException;
 import db.connectionPooling.ConnectionPooling;
 import db.connectionPooling.ConnectionPoolingImplementation;
 import model.Aktie;
+import model.AktieBenutzer;
 import model.Benutzer;
 import model.Verkauf;
 
@@ -90,48 +91,46 @@ public class VerkaufDAO extends AbstractDAO {
 		c.commit();
 		return verkauf;
 	}
+	
+	
 
-	public synchronized int[] insertAuftrag(double preis, String kuerzel, long anzahl) {
-		ConnectionPooling connectionPooling;
-		connectionPooling = ConnectionPoolingImplementation.getInstance(1, 10);
-		
-		Connection con = connectionPooling.getConnection();
+
+	public synchronized int insertAuftrag(double preis, String kuerzel) {
 		try {
 			Benutzer benutzer = new Benutzer().getUserObjectFromSession();
 			int aktieId;
 			AktieDAO aktieDao = new AktieDAO();
 			
-			ArrayList<Aktie> aktienVonUser = aktieDao.getAktieByUserIdWithKuerzel(benutzer.getBenutzerid(), kuerzel);
-			String insertTableSQL = "INSERT INTO auftrag (Preis, Fk_AktienID) "
+			
+			String insertTableSQL = "INSERT INTO tbl_verkauf (preis, aktien_fk, benutzer_fk) "
                     			  + "VALUES (?, ?)";
 			
-				PreparedStatement preparedStatement = con.prepareStatement(insertTableSQL);
+				PreparedStatement preparedStatement = c.prepareStatement(insertTableSQL);
 				preparedStatement.setDouble(1, preis);
 				
-				int i = 0;
-				int maxIndex = aktienVonUser.size() - 1;
-				int[] auftragIds = new int[(int) anzahl];
-				while (anzahl>0 && i<=maxIndex){
-					anzahl = anzahl -1;
-					aktieId = aktienVonUser.get(i).getId();
-					preparedStatement.setInt(2, aktieId);
-					preparedStatement.executeUpdate();
-					auftragIds[i] = aktieId;
-					i++;
-				}
+				
 				
 			preparedStatement.close();
-			connectionPooling.putConnection(con);	
+		//	connectionPooling.putConnection(con);	
 			
-			return auftragIds;
-		
+			return 1;
 			} catch (SQLException e) {
 			System.out.println("Es trat ein Fehler mit SQL auf");
 			e.printStackTrace();
-			connectionPooling.putConnection(con);
+		//	connectionPooling.putConnection(con);
 			}
 		
-			return null;
+			return 0;
+	}
+
+	public void deleteAuftragById(int verkaufsid) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void doKaufen(Verkauf verkauf) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
