@@ -2,6 +2,9 @@ package model;
 
 import java.util.ArrayList;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
 public class Benutzer {
 	private int benutzerid;
 	private String name;
@@ -45,5 +48,13 @@ public class Benutzer {
 		this.aktienListe = aktienListe;
 	}
 	private double kontostand;
+	public Benutzer getUserObjectFromSession() {
+			Benutzer benutzer;
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			ExternalContext externalContext = facesContext.getExternalContext();
+			benutzer = (Benutzer) externalContext.getSessionMap().get("Benutzer");
+			return benutzer;
+		
+	}
 
 }

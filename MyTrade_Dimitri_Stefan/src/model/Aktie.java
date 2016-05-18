@@ -1,12 +1,23 @@
 package model;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+
 public class Aktie {
 	private int id;
 	private String name;
 	private double	nominalwert;
 	private double dividende;
+	private String kuerzel;
 	public int getId() {
 		return id;
+	}
+	public Aktie getAktieFromSession() {
+		Aktie a;
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		a = (Aktie) externalContext.getSessionMap().get("Aktie");
+		return a;
 	}
 	public void setId(int id) {
 		this.id = id;
@@ -28,6 +39,12 @@ public class Aktie {
 	}
 	public void setDividende(double dividende) {
 		this.dividende = dividende;
+	}
+	public String getKuerzel() {
+		return kuerzel;
+	}
+	public void setKuerzel(String kuerzel) {
+		this.kuerzel = kuerzel;
 	}
 
 }

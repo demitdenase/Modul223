@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import db.*;
 import model.*;
 
+
 @ManagedBean(name = "loginBean")
 public class LoginBean {
 	private String benutzername;
