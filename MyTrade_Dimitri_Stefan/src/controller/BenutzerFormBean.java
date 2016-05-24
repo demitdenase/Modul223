@@ -42,13 +42,13 @@ public class BenutzerFormBean {
 	 * Speichert den Benutzer im UserModel und dann in der DB.
 	 * @return String um auf die nächste Seite zu kommen(Admin.xhtml)
 	 */
-	public String saveUser(){
+	public String saveBenutzer(){
 		Benutzer benutzer = new Benutzer();
 		BenutzerDAO benutzerDao;
 		try {
 			//User in Datenbank schreiben
 			benutzerDao = new BenutzerDAO();
-			benutzer.setName(name);
+			benutzer.setName(login);
 			benutzer.setPasswortHash(passwort);
 			benutzer.setRolle(rolle);
 			benutzer.setKontostand(10000);

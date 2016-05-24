@@ -22,19 +22,19 @@
 		<h:form>
 			<h:panelGrid>
 				<h:outputLabel for="fieldName" value="Name" />
-				<h:outputLabel id="fieldName" value="#{aktienFormBean.name}" />
+				<h:outputLabel id="fieldName" value="#{benutzerFormBean.name}" />
 
-				<h:outputLabel for="fieldKuerzel" value="Kürzel" />
-				<h:outputLabel id="fieldKuerzel" value="#{aktienFormBean.kuerzel}" />
+				<h:outputLabel for="fieldKuerzel" value="Vorname" />
+				<h:outputLabel id="fieldKuerzel" value="#{benutzerFormBean.vorname}" />
 
-				<h:outputLabel for="fieldPreis" value="Normalpreis (CHF)" />
-				<h:outputLabel id="fieldPreis" value="#{aktienFormBean.nominalpreis}" />
+				<h:outputLabel for="fieldPreis" value="Login" />
+				<h:outputLabel id="fieldPreis" value="#{benutzerFormBean.login}" />
 
-				<h:outputLabel for="fieldDividende" value="Dividende" />
-				<h:outputLabel id="fieldDividende" value="#{aktienFormBean.dividende}" />
+				<h:outputLabel for="fieldDividende" value="Passwort" />
+				<h:outputLabel id="fieldDividende" value="#{benutzerFormBean.passwort}" />
 
-				<h:outputLabel for="fieldAnzahl" value="Stückanzahl" />
-				<h:outputLabel id="fieldAnzahl" value="#{aktienFormBean.anzahl}" />
+				<h:outputLabel for="fieldAnzahl" value="Rolle" />
+				<h:outputLabel id="fieldAnzahl" value="#{benutzerFormBean.rolle}" />
 			</h:panelGrid>
 
 			<h:commandButton value="Zurück" action="#{aktienFormBean.back2}" ajax="false" />
