@@ -16,17 +16,17 @@
 		<p:panel header="My Trade">
         <h:panelGrid id="grid" columns="4" cellpadding="5">
             <h:outputLabel for="username" value="Benutzername" style="font-weight:bold"/>                    
-            <p:inputText id="username" value="#{loginBean.benutzername}" required="true"  label="Benutzername"/>
+            <p:inputText id="username" value="#{loginFormBean.benutzername}" required="true"  label="Benutzername"/>
             <p:message for="username" />
             <!-- <h:outputText value="#{validationView.text}" /> -->
  
             <h:outputLabel for="password" value="Passwort" style="font-weight:bold"/>                    
-            <p:password id="password" value="#{loginBean.passwortHash}" required="true" label="Passwort"/>
+            <p:password id="password" value="#{loginFormBean.passwortHash}" required="true" label="Passwort"/>
             <p:message for="password" />
             <!-- <h:outputText value="#{validationView.text}" /> -->            
         </h:panelGrid>
  
-       <p:commandButton value="OK" ajax="false" validateClient="true" style="margin-left:282px" action="#{loginBean.validate}"/>
+       <p:commandButton value="OK" ajax="false" validateClient="true" style="margin-left:282px" action="#{loginFormBean.validate}"/>
     </p:panel>
 	</h:form>
 
