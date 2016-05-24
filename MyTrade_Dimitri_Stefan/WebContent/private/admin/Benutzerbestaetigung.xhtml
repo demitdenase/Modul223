@@ -10,9 +10,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<head>
+<h:head>
 <title>Benutzer erfassen</title>
-</head>
+</h:head>
 <body>
 
 <p:tabView>
@@ -36,8 +36,8 @@
 				<h:outputLabel id="fieldAnzahl" value="#{benutzerFormBean.rolle}" />
 			</h:panelGrid>
 
-			<h:commandButton value="Zurück" action="#{benutzerFormBean.back2}" ajax="false" />
-			<h:commandButton value="Speichern" action="#{benutzerFormBean.saveUser}" ajax="false" />
+			<p:commandButton value="Zurück" action="#{benutzerFormBean.back2}" ajax="false" />
+			<p:commandButton value="Speichern" action="#{benutzerFormBean.saveUser}" ajax="false" />
 
 		</h:form>
 		</p:tab>

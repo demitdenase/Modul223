@@ -22,34 +22,34 @@
 
 				<h:outputLabel value="Aktueller Kontostand: " />
 				<h:outputText value="#{meinPortfolioBean.konto}" />
-				<p:dataTable value="#{meinPortfolioBean.list}" var="aktie"
+				<p:dataTable value="#{meinPortfolioBean.aktienListe}" var="aktie"
 					styleClass="order-table" headerClass="order-table-header"
 					rowClasses="order-table-odd-row,order-table-even-row">
 
 					<p:column>
 						<f:facet name="header">Symbol</f:facet>
-    				#{aktie.aktie.symbol}
+    				#{aktie.symbol}
     			</p:column>
 
 					<p:column>
 						<f:facet name="header">Aktien</f:facet>
-    				#{aktie.aktie.name}
+    				#{aktie.name}
     			</p:column>
 
 					<p:column>
 						<f:facet name="header">Anzahl</f:facet>
-    				#{aktie.aktie.menge}
+    				#{0}
     			</p:column>
 
 					<p:column>
 						<f:facet name="header">Letzte Dividende (CHF)</f:facet>
-    				#{aktie.aktie.dividend}
+    				#{aktie.dividende}
     			</p:column>
 
 					<p:column>
 					<f:facet name="header">Aktionen</f:facet>
 						<h:commandLink value="verkaufen"
-							action="#{auftragErfassenBean.verkaufen}" />
+							action="#{auftragErfassenBean.verkaufen(aktie)}" />
 					</p:column>
 
 				</p:dataTable>

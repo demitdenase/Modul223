@@ -4,13 +4,16 @@
 <!--
 	Author:	murrid
 	Date:	18.05.2016 
- --> -->
+ -->
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 
-<title>Aufrtag erfassen</title>
+<title>Auftrag erfassen</title>
 </h:head>
 <body>
 	<div id="mutterBox">
@@ -50,8 +53,8 @@
 					</h:inputText>
 				</h:panelGrid>
 								
-				<h:commandButton value="Zurück" action="#{auftragErfassenBean.back}" ajax="false" />
-				<h:commandButton value="OK" action="#{auftragErfassenBean.insertAuftrag}" ajax="false" />
+				<p:commandButton value="Zurück" action="#{auftragErfassenBean.back}" ajax="false" />
+				<p:commandButton value="OK" action="#{auftragErfassenBean.insertAuftrag}" ajax="false" />
 
 				<h:messages for="fieldPreis" style="color:red;margin:8px;" />
 				<h:messages for="fieldAnzahl" style="color:red;margin:8px;" />
