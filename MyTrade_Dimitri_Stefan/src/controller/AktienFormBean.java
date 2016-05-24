@@ -10,49 +10,43 @@ import db.VerkaufDAO;
 import model.Aktie;
 import model.Benutzer;
 
-@ManagedBean
+@ManagedBean(name = "aktienFormBean")
 @SessionScoped
 public class AktienFormBean {
 	private Aktie aktie;
-	private String   name;
-	private String   kuerzel;
-	private double   nominalpreis;
-	private double   dividende;
-	private int      benutzerID;
-	private int      anzahl;
+	private String name;
+	private String kuerzel;
+	private double nominalpreis;
+	private double dividende;
+	private int benutzerID;
+	private int anzahl;
 	private AktieDAO aktieDao;
 
 	public AktienFormBean() {
-		try {
-			aktieDao = new AktieDAO();
-			Aktie aktie = new Aktie();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		anzahl = 1; // Standartwert
 	}
 
 	// Speichert eingegebene Daten in die Datenbank. Liefert False, falls der
 	// INSERT ungueltig ist
 	public String save() throws SQLException {
+		aktieDao = new AktieDAO();
+		Aktie aktie = new Aktie();
 		MeldungFormBean m = new MeldungFormBean();
-		Benutzer benutzer = new Benutzer().getUserObjectFromSession();
+		aktie.setName(name);
+		aktie.setKuerzel(kuerzel);
+		aktie.setNominalwert(nominalpreis);
+		aktie.setDividende(dividende);
+		aktie = aktieDao.insertAktie(aktie);
 
-		if (aktieDao.insertAktie(aktie)!=null) {
-			
-			VerkaufDAO verkaufDao = new VerkaufDAO();
-//			insert in DB
-			verkaufDao.insertAuftrag(nominalpreis, kuerzel);
-			// Meldung
-			m.setAktuelleMeldung(m.getMeldung1() + name);
-			m.putMeldungToSession(m);
-			return "/private/admin/Admin?faces-redirect=true";
-		} else {
-			m.setAktuelleMeldung("");
-			m.putMeldungToSession(m);
-			return "/private/admin/Aktienerfassen?faces-redirect=true";
-		}
+		VerkaufDAO verkaufDao = new VerkaufDAO();
+		// insert in DB
+		verkaufDao.insertAuftrag(nominalpreis, aktie.getId());
+		// Meldung
+		m.setAktuelleMeldung(m.getMeldung1() + name);
+		m.putMeldungToSession(m);
+		return "/private/admin/Admin?faces-redirect=true";
+
 	}
 
 	// Zurueck-Button von Aktienerfassen zur Hauptseite
@@ -70,13 +64,21 @@ public class AktienFormBean {
 		return "/private/admin/Aktienbestaetigung?faces-redirect=true";
 	}
 
-	// Getters and Setters
+	public Aktie getAktie() {
+		return aktie;
+	}
+
+	public void setAktie(Aktie aktie) {
+		this.aktie = aktie;
+	}
+
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+
 	}
 
 	public String getKuerzel() {
@@ -85,6 +87,7 @@ public class AktienFormBean {
 
 	public void setKuerzel(String kuerzel) {
 		this.kuerzel = kuerzel;
+
 	}
 
 	public double getNominalpreis() {
@@ -93,6 +96,7 @@ public class AktienFormBean {
 
 	public void setNominalpreis(double nominalpreis) {
 		this.nominalpreis = nominalpreis;
+
 	}
 
 	public double getDividende() {
@@ -101,6 +105,15 @@ public class AktienFormBean {
 
 	public void setDividende(double dividende) {
 		this.dividende = dividende;
+
+	}
+
+	public int getAnzahl() {
+		return anzahl;
+	}
+
+	public void setAnzahl(int anzahl) {
+		this.anzahl = anzahl;
 	}
 
 	public int getBenutzerID() {
@@ -126,13 +139,4 @@ public class AktienFormBean {
 	public void setaktieDao(AktieDAO aktieDao) {
 		this.aktieDao = aktieDao;
 	}
-
-	public int getanzahl() {
-		return anzahl;
-	}
-
-	public void setanzahl(int anzahl) {
-		this.anzahl = anzahl;
-	}
 }
-

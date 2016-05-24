@@ -52,7 +52,7 @@ public class Benutzer {
 			Benutzer benutzer;
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			ExternalContext externalContext = facesContext.getExternalContext();
-			benutzer = (Benutzer) externalContext.getSessionMap().get("Benutzer");
+			benutzer = (Benutzer) externalContext.getSessionMap().get("benutzer");
 			return benutzer;
 		
 	}

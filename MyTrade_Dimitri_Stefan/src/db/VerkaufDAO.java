@@ -95,21 +95,23 @@ public class VerkaufDAO extends AbstractDAO {
 	
 
 
-	public synchronized int insertAuftrag(double preis, String kuerzel) {
+	public synchronized int insertAuftrag(double preis, int aktienId) {
 		try {
 			Benutzer benutzer = new Benutzer().getUserObjectFromSession();
-			int aktieId;
-			AktieDAO aktieDao = new AktieDAO();
+
 			
 			
 			String insertTableSQL = "INSERT INTO tbl_verkauf (preis, aktien_fk, benutzer_fk) "
-                    			  + "VALUES (?, ?)";
+                    			  + "VALUES (?, ?, ?)";
 			
 				PreparedStatement preparedStatement = c.prepareStatement(insertTableSQL);
 				preparedStatement.setDouble(1, preis);
+				preparedStatement.setInt(2, aktienId);
+				preparedStatement.setInt(3, benutzer.getBenutzerid());
 				
 				
 				
+			c.commit();	
 			preparedStatement.close();
 		//	connectionPooling.putConnection(con);	
 			
