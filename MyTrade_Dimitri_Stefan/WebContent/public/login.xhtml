@@ -12,7 +12,6 @@
 </h:head>
 
 <body>
-<h1>Login</h1>
 	<h:form method="POST">
 
 		<p:panel header="My Trade">
@@ -24,7 +23,7 @@
             <!-- <h:outputText value="#{validationView.text}" /> -->
  
             <h:outputLabel for="password" value="Passwort" style="font-weight:bold"/>                    
-            <p:inputText id="password" value="#{loginBean.passwortHash}" required="true" label="Passwort"/>
+            <p:password id="password" value="#{loginBean.passwortHash}" required="true" label="Passwort"/>
             <p:message for="password" />
             <!-- <h:outputText value="#{validationView.text}" /> -->
  

@@ -11,7 +11,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta charset="UTF-8" />
-	<title>Übersicht Admin</title>
+	<title>Aktie erfassen</title>
 </h:head>
 <body>
 	<p:tabView>
@@ -52,7 +52,7 @@
 
 			</h:panelGrid>
 			
-				<p:commandButton value="Zurück" action="adminUebersicht?faces-redirect=true"
+				<p:commandButton value="Zurück" action="admin?faces-redirect=true"
 					ajax="false" />
 				<p:commandButton value="OK" action="#{aktienFormBean.next}"
 					ajax="false" />
@@ -69,6 +69,7 @@
 		<p:tab title="Username?">
 			<h:form>
 				<p>Wollen Sie sich abmelden?</p>
+				<p:commandButton value="Ja!" action="#{loginFormBean.logout}" />
 			</h:form>
 		</p:tab>
 	</p:tabView>
