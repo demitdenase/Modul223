@@ -48,7 +48,7 @@ public class LoginFormBean {
 				benutzer = jdbc.getUserByLogin(benutzername);
 				FacesContext facesContext = FacesContext.getCurrentInstance();
 				ExternalContext externalContext = facesContext.getExternalContext();
-				externalContext.getSessionMap().put("user", benutzer);
+				externalContext.getSessionMap().put("benutzer", benutzer);
 //				admin
 				if(1 == benutzer.getRolle()){
 					return "/private/admin/Admin?faces-redirect=true";
@@ -66,7 +66,7 @@ public class LoginFormBean {
 		benutzer = jdbc.getUserByLogin(benutzername);
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
-		externalContext.getSessionMap().put(null, null);
+		externalContext.getSessionMap().put("benutzer", null);
 		return "/public/login?faces-redirect=true";
 	}
 
