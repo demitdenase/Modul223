@@ -88,11 +88,10 @@ public class BenutzerDAO extends AbstractDAO {
 	public Benutzer insertBenutzer(Benutzer benutzer) throws SQLException {
 		Statement stm = c.createStatement();
 		int numero;
-		numero = stm.executeUpdate(
-				"INSERT INTO `mytrade`.`tbl_benutzer`(`benutzername`,`passwort_hash`,`rolle`,`kontostand`)VALUES ("
-						+ benutzer.getName() + "', '" + benutzer.getPasswortHash() + "', " + benutzer.getRolle() + ", "
-						+ benutzer.getKontostand() + ")",
-				Statement.RETURN_GENERATED_KEYS);
+		String sql = "INSERT INTO `mytrade`.`tbl_benutzer`(`benutzername`,`passwort_hash`,`rolle`,`kontostand`)VALUES ('"
+				+ benutzer.getName() + "', '" + benutzer.getPasswortHash() + "', " + benutzer.getRolle() + ", "
+				+ benutzer.getKontostand() + ")";
+		numero = stm.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
 		c.commit();
 		benutzer.setBenutzerid(numero);
 		return benutzer;
@@ -127,7 +126,7 @@ public class BenutzerDAO extends AbstractDAO {
 				benutzer.setName(rs.getString(2));
 				benutzer.setPasswortHash(rs.getString(3));
 				benutzer.setRolle(rs.getInt(4));
-				benutzer.setKontostand(rs.getDouble(5));				
+				benutzer.setKontostand(rs.getDouble(5));
 				int benutzerID = rs.getInt(1);
 				count++;
 

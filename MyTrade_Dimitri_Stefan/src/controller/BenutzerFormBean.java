@@ -41,18 +41,18 @@ public class BenutzerFormBean {
 	/**
 	 * Speichert den Benutzer im UserModel und dann in der DB.
 	 * @return String um auf die nächste Seite zu kommen(Admin.xhtml)
+	 * @throws SQLException 
 	 */
-	public String saveBenutzer(){
+	public String saveUser() throws SQLException{
 		Benutzer benutzer = new Benutzer();
-		BenutzerDAO benutzerDao;
+		BenutzerDAO benutzerDao = new BenutzerDAO();
 		try {
 			//User in Datenbank schreiben
-			benutzerDao = new BenutzerDAO();
 			benutzer.setName(login);
 			benutzer.setPasswortHash(passwort);
 			benutzer.setRolle(rolle);
-			benutzer.setKontostand(10000);
-			benutzerDao.insertBenutzer(benutzer);
+			benutzer.setKontostand(10000.00);
+			benutzer = benutzerDao.insertBenutzer(benutzer);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

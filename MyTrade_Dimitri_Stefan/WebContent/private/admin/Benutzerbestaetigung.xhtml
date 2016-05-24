@@ -8,7 +8,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <head>
@@ -37,8 +36,8 @@
 				<h:outputLabel id="fieldAnzahl" value="#{benutzerFormBean.rolle}" />
 			</h:panelGrid>
 
-			<h:commandButton value="Zurück" action="#{aktienFormBean.back2}" ajax="false" />
-			<h:commandButton value="Speichern" action="#{aktienFormBean.save}" ajax="false" />
+			<h:commandButton value="Zurück" action="#{benutzerFormBean.back2}" ajax="false" />
+			<h:commandButton value="Speichern" action="#{benutzerFormBean.saveUser}" ajax="false" />
 
 		</h:form>
 		</p:tab>
