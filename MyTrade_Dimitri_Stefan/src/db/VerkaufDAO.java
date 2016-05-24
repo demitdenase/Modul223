@@ -124,7 +124,35 @@ public class VerkaufDAO extends AbstractDAO {
 		
 			return 0;
 	}
+	
+	public synchronized int insertAuftragAdmin(double preis, int aktienId) {
+		try {
 
+			
+			
+			String insertTableSQL = "INSERT INTO mytrade.tbl_verkauf (preis, aktien_fk, benutzer_fk) "
+                    			  + "VALUES (?, ?, ?)";
+			
+				PreparedStatement preparedStatement = c.prepareStatement(insertTableSQL);
+				preparedStatement.setDouble(1, preis);
+				preparedStatement.setInt(2, aktienId);
+				preparedStatement.setInt(3, 1);
+				
+				
+				
+			c.commit();	
+			preparedStatement.close();
+		//	connectionPooling.putConnection(con);	
+			
+			return 1;
+			} catch (SQLException e) {
+			System.out.println("Es trat ein Fehler mit SQL auf");
+			e.printStackTrace();
+		//	connectionPooling.putConnection(con);
+			}
+		
+			return 0;
+	}
 	public void deleteAuftragById(int verkaufsid) {
 		// TODO Auto-generated method stub
 		

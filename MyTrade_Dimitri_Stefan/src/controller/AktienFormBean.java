@@ -41,7 +41,7 @@ public class AktienFormBean {
 
 		VerkaufDAO verkaufDao = new VerkaufDAO();
 		// insert in DB
-		verkaufDao.insertAuftrag(nominalpreis, aktie.getId());
+		verkaufDao.insertAuftragAdmin(nominalpreis, aktie.getId());
 		// Meldung
 		m.setAktuelleMeldung(m.getMeldung1() + name);
 		m.putMeldungToSession(m);
