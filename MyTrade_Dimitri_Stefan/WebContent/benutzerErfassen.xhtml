@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+	Author:	Colin Quadrelli
+	
+	Date:	18.05.2016 
+ -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Benutzer erfassen</title>
+</h:head>
+
+<body>
+	<p:tabView>
+		<p:tab title="Administration">
+			<h:form>
+				<p:panel header="Benutzer erfassen">
+
+					<h:panelGrid id="grid" columns="2" cellpadding="5">
+						<h:outputLabel for="name" value="Name" style="font-weight:bold" />
+						<p:inputText id="name" value="#{benutzerFormBean.name}" />
+
+						<h:outputLabel for="vorname" value="Vorname"
+							style="font-weight:bold" />
+						<p:inputText id="vorname" value="#{benutzerFormBean.vorname}" />
+
+						<h:outputLabel for="login" value="Login" style="font-weight:bold" />
+						<p:inputText id="login" value="#{benutzerFormBean.login}" />
+
+						<h:outputLabel for="passwort" value="Passwort"
+							style="font-weight:bold" />
+						<p:inputText id="passwort" value="#{benutzerFormBean.passwort}" />
+
+						<p:outputLabel for="console" value="Rolle"
+							style="font-weight:bold" />
+						<p:selectOneMenu id="console" value="#{benutzerFormBean.rolle}"
+							style="width:125px">
+							<f:selectItem itemLabel="Administrator" itemValue="administrator" />
+							<f:selectItem itemLabel="Aktienhändler"
+								itemValue="aktienhaendler" />
+
+						</p:selectOneMenu>
+						<p:commandButton value="Zurück" action="adminUebersicht?faces-redirect=true" />
+						<p:commandButton value="OK" action="#{benutzerFormBean.saveUser}" />
+
+					</h:panelGrid>
+
+
+				</p:panel>
+			</h:form>
+		</p:tab>
+
+		<p:tab title="#{loginFormBean.username}">
+			<h:form>
+				<p>
+					Wollen Sie sich abmelden?
+					<p:commandButton value="Ja!" action="#{loginFormBean.logout}" />
+				</p>
+			</h:form>
+		</p:tab>
+	</p:tabView>
+
+
+
+
+</body>
+</html>

@@ -17,18 +17,18 @@
 	<p:tabView>
 		<p:tab title="Administration">
 			<h:panelGrid columns="1" cellpadding="10">
-				<!--<h:outputLabel value="Aktie erfassen" action="Aktienerfassen.xhtml" /> -->
-				<p:link outcome="Aktienerfassen.xhtml" value="Aktien erfassen" />
-				<!--<h:outputLabel value="Benutzer erfassen" />-->
-				<p:link outcome="Benutzererfassem.xhtml" value="Benutzer erfassen" />
-				<h:outputLabel value="Dividende ausschütten" />
+				<h:link value="Aktie erfassen" outcome="aktieErfassen" />
+				<h:link value="Benutzer erfassen" outcome="benutzerErfassen"/>
+				<h:link value="Dividende ausschütten" outcome="dividendeAusschuetten"/>
 			</h:panelGrid>
 		</p:tab>
 		
-		<p:tab title="Username?">
+		
+		<p:tab title="#{loginFormBean.username}">
 			<h:form>
 				<p>
 					Wollen Sie sich abmelden?
+					<p:commandButton value="Ja!" action="#{loginFormBean.logout}" />
 				</p>
 			</h:form>
 		</p:tab>
@@ -36,5 +36,3 @@
 
 </body>
 </html>
-
-
