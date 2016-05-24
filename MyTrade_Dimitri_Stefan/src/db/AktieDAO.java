@@ -55,7 +55,8 @@ public class AktieDAO extends AbstractDAO {
 
 	public Aktie findAktie(int aktienId) throws SQLException {
 		Statement stm = c.createStatement();
-		ResultSet rs = stm.executeQuery("SELECT * FROM `mytrade`.`tbl_aktie` WHERE `aktien_pk`= " + aktienId);
+		String sql = "SELECT * FROM `mytrade`.`tbl_aktien` WHERE `aktien_pk`= " + aktienId;
+		ResultSet rs = stm.executeQuery(sql);
 		if (rs.next()) {
 			Aktie aktie = new Aktie();
 			aktie.setId(rs.getInt(1));
@@ -139,8 +140,8 @@ public class AktieDAO extends AbstractDAO {
     	AktieBenutzer aktieBenutzer;
     	AktieDAO aktieDAO;
     	ArrayList<AktieBenutzer> portfolioList = new ArrayList<AktieBenutzer>();
-    	String insert = "SELECT tbl_aktien.aktien_pk, tbl_aktien.kuerzel, tbl_aktien.name, tbl_aktien.nominalwert, tbl_aktien.dividende, tbl_benutzer_aktien.menge, tbl_benutzer_aktien.benutzer_fk FROM tbl_benutzer_aktien"
-    			+ " INNER JOIN tbl_aktien ON tbl_benutzer_aktien.benutzer_fk = " + user.getBenutzerid() + " AND tbl_benutzer_aktien.aktien_fk = tbl_aktien.aktien_pk";
+    	String insert = "SELECT tbl_aktien.aktien_pk, tbl_aktien.kuerzel, tbl_aktien.name, tbl_aktien.nominalwert, tbl_aktien.dividende, tbl_benutzer_aktien.menge, tbl_benutzer_aktien.benutzer_fk FROM mytrade.tbl_benutzer_aktien"
+    			+ " INNER JOIN mytrade.tbl_aktien ON mytrade.tbl_benutzer_aktien.benutzer_fk = " + user.getBenutzerid() + " AND mytrade.tbl_benutzer_aktien.aktien_fk = mytrade.tbl_aktien.aktien_pk";
         PreparedStatement statement = null;
 
         try {
@@ -152,8 +153,10 @@ public class AktieDAO extends AbstractDAO {
             while (result.next()) {
             	aktieDAO = new AktieDAO();
                 aktieBenutzer = new AktieBenutzer();
-                aktieBenutzer.setAktie(aktieDAO.findAktie(result.getInt("tbl_aktien.aktien_pk")));
-                aktieBenutzer.setMenge(result.getInt("tbl_verkauf.menge"));
+                int temp = result.getInt(1);
+                aktieBenutzer.setAktie(aktieDAO.findAktie(temp));
+                temp = result.getInt(6);
+                aktieBenutzer.setMenge(temp);
                 aktieBenutzer.setBenutzer(user);
                 portfolioList.add(aktieBenutzer);
             } 

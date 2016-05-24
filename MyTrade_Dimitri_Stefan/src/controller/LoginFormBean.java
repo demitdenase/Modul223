@@ -44,8 +44,9 @@ public class LoginFormBean {
 	public String validate() {
 		if (jdbc.login(benutzername, passwortHash)) {
 			System.out.println("hat geklappt");
+				
 				benutzer = new Benutzer();
-				benutzer = jdbc.getUserByLogin(benutzername);
+				benutzer = jdbc.getCurrentUser();
 				FacesContext facesContext = FacesContext.getCurrentInstance();
 				ExternalContext externalContext = facesContext.getExternalContext();
 				externalContext.getSessionMap().put("benutzer", benutzer);

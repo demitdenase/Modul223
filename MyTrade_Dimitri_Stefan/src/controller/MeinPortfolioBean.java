@@ -4,8 +4,8 @@ package controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.*;
 
 import db.AktieDAO;
 import model.Aktie;
@@ -14,15 +14,29 @@ import model.Benutzer;
 
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class MeinPortfolioBean {
 	Benutzer benutzer;
 	AktieDAO aktieDAO;
+	private int menge;
 	ArrayList<AktieBenutzer> list;
+	ArrayList<Aktie> aktienListe;
+	public ArrayList<Aktie> getAktienListe() {
+		return benutzer.getAktienListe();
+	}
+
+	public void setAktienListe(ArrayList<Aktie> aktienListe) {
+		this.aktienListe = aktienListe;
+	}
 	Double konto;
+	@PostConstruct
+	public void init() throws SQLException {
+		benutzer = benutzer.getUserObjectFromSession();
+		aktienListe = benutzer.getAktienListe();
+	}
 	
 	public Benutzer getBenutzer() {
-		return benutzer;
+		return benutzer.getUserObjectFromSession();
 	}
 
 	public void setBenutzer(Benutzer benutzer) {
@@ -63,15 +77,19 @@ public class MeinPortfolioBean {
 	 * @throws SQLException 
 	 */
 	public ArrayList<AktieBenutzer> getList() throws SQLException {
-		aktieDAO =    new AktieDAO();
-		benutzer =    new Benutzer().getUserObjectFromSession();
-		list = new ArrayList<AktieBenutzer>();
-//		holt Aktien aus DB
-		list = aktieDAO.getAllAktienforUser(benutzer);
+		
 		return list;
 	}
 	public void setList(ArrayList<AktieBenutzer> list) {
 		this.list = list;
+	}
+
+	public int getMenge() {
+		return menge;
+	}
+
+	public void setMenge(int menge) {
+		this.menge = menge;
 	}
 
 }

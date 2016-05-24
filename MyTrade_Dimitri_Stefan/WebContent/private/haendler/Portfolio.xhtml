@@ -22,7 +22,7 @@
 
 				<h:outputLabel value="Aktueller Kontostand: " />
 				<h:outputText value="#{meinPortfolioBean.konto}" />
-				<p:dataTable value="#{meinPortfolioBean.aktienListe}" var="aktie"
+				<p:dataTable value="#{meinPortfolioBean.benutzer.aktienListe}" var="aktie"
 					styleClass="order-table" headerClass="order-table-header"
 					rowClasses="order-table-odd-row,order-table-even-row">
 
@@ -38,7 +38,7 @@
 
 					<p:column>
 						<f:facet name="header">Anzahl</f:facet>
-    				#{0}
+    				#{loginFormBean.menge}
     			</p:column>
 
 					<p:column>

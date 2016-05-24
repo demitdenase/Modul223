@@ -8,15 +8,34 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.NoPermissionException;
 
 import controller.DividendenRechner;
 import db.connectionPooling.ConnectionPoolingImplementation;
+import model.AktieBenutzer;
 import model.Benutzer;
-
+@SessionScoped
 public class BenutzerDAO extends AbstractDAO {
 	Connection c;
+	Benutzer currentUser;
+
+	public Connection getC() {
+		return c;
+	}
+
+	public void setC(Connection c) {
+		this.c = c;
+	}
+
+	public Benutzer getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(Benutzer currentUser) {
+		this.currentUser = currentUser;
+	}
 
 	public BenutzerDAO() throws SQLException {
 		try {
@@ -127,16 +146,22 @@ public class BenutzerDAO extends AbstractDAO {
 				benutzer.setPasswortHash(rs.getString(3));
 				benutzer.setRolle(rs.getInt(4));
 				benutzer.setKontostand(rs.getDouble(5));
+				AktieDAO aktieDAO = new AktieDAO();
+			    ArrayList<AktieBenutzer> list = aktieDAO.getAllAktienforUser(benutzer);
+			    for(int i=0;i<list.size();i++){
+			    	benutzer.getAktienListe().add(list.get(i).getAktie());
+			    }
 				int benutzerID = rs.getInt(1);
 				count++;
-
+				currentUser = new Benutzer();
+				currentUser = benutzer;
 				if (count > 1) {
 					System.out.println("Es gibt mehr als einen Benutzer: " + user);
+					
 					return false;
 				} else if (count == 1) {
 
 					FacesContext context = FacesContext.getCurrentInstance();
-					context.getExternalContext().getSessionMap().put("id", "" + benutzerID);
 					context.getExternalContext().getSessionMap().put("user", benutzer);
 					System.out.println(benutzerID);
 					return true;
@@ -215,5 +240,6 @@ public class BenutzerDAO extends AbstractDAO {
 			sqlEx.printStackTrace();
 		}
 	}
+
 
 }
