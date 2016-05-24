@@ -14,7 +14,7 @@ import model.Benutzer;
 
 
 
-@ManagedBean(name="loginBean")
+@ManagedBean(name="loginFormBean")
 @SessionScoped
 public class LoginFormBean {
 	private Benutzer benutzer;
