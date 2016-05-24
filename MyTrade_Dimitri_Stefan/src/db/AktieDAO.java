@@ -74,7 +74,7 @@ public class AktieDAO extends AbstractDAO {
 		Statement stm = c.createStatement();
 		int numero;
 		numero = stm
-				.executeUpdate("INSERT INTO `mytrade`.`tbl_aktie`(`name`,`nominalwert`,`dividende`,`kuerzel`)VALUES ('"
+				.executeUpdate("INSERT INTO `mytrade`.`tbl_aktien`(`name`,`nominalwert`,`dividende`,`kuerzel`)VALUES ('"
 						+ aktie.getName() + "', " + aktie.getNominalwert() + ", " + aktie.getDividende() + ",'"
 						+ aktie.getKuerzel() + "')", Statement.RETURN_GENERATED_KEYS);
 		c.commit();

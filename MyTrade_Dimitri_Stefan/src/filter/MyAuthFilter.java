@@ -151,7 +151,7 @@ String haendlerUrl = "/MyTrade_Dimitri_Stefan/faces/private/haendler/";
 			MeldungFormBean m = new MeldungFormBean();
 			m.setAktuelleMeldung(m.getErrorMeldung2());
 			m.putMeldungToSession(m);
-			response.sendRedirect(haendlerUrl + "Portfolio.xhtml");
+			response.sendRedirect(haendlerUrl + "Haendler.xhtml");
 		}
 
 		debugOut("  Session: " + holeSessionVariable(request));
