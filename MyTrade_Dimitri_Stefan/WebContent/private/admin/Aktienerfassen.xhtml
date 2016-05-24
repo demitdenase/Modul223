@@ -15,10 +15,8 @@
 </h:head>
 <body>
 	<p:tabView>
-	
-	
 		<p:tab title="Administration">
-		<p:outputLabel  value="Aktienerfassen"  style="font-size:30px"/>
+		<p:outputLabel  value="Aktien erfassen"  style="font-size:30px"/>
 		<h:form>
 			<h:panelGrid id="grid" columns="2" cellpadding="5">
 					
@@ -29,7 +27,7 @@
 					</p:inputText>
 
 					<h:outputLabel for="fieldKuerzel" value="Kürzel" style="font-weight:bold"/>
-					<p:inputText id="fieldKuerzel" value="#{aktienFormBean.kuerzel}">
+					<p:inputText id="fieldKuerzel" value="#{aktienFormBean.kuerzel}" label="Kürzel">
 						<f:validateLength minimum="4" maximum="4" />
 						<f:validateRegex pattern="[a-zA-Z]*" />
 					</p:inputText>
@@ -52,7 +50,7 @@
 
 			</h:panelGrid>
 			
-				<p:commandButton value="Zurück" action="Admin?faces-redirect=true"
+				<p:commandButton value="Zurück" action="{aktienFormBean.back}"
 					ajax="false" />
 				<p:commandButton value="OK" action="#{aktienFormBean.next}"
 					ajax="false" />

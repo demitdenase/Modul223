@@ -3,26 +3,24 @@
 	Author:	Omar Shawahne
 	Date:	18.05.2016 
  -->
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	<h:head>
-		<meta charset="UTF-8" />
-		<title>Dividende Ausschütten</title>
-	</h:head>
-	<body>
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Übersicht Händler</title>
+</h:head>
+<body>
 	<p:tabView>
-		<p:tab title="Administration">
-			<h:form>
-				<p>
-					Wollen Sie die Dividenden wirklich ausschütten?
-					<p:commandButton value="Zurück" action="{aktienFormBean.back}" />
-					<p:commandButton value="Ja!" action="#{dividendenFormBean.ausschuetten}" />
-				</p>
-			</h:form>
+		<p:tab title="Mein Portfolio">
+			<ui:include src="/Portfolio.xhtml" />
+		</p:tab>
+		
+		<p:tab title="Offene Aufträge">
+			<ui:include src="/Offeneauftraege.xhtml" />
 		</p:tab>
 		
 		<p:tab title="#{loginFormBean.username}">
@@ -34,5 +32,6 @@
 			</h:form>
 		</p:tab>
 	</p:tabView>
-	</body>
-</ui:composition>
+
+</body>
+</html>

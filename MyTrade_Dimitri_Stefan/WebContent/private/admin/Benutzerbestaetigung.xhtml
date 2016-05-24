@@ -7,22 +7,18 @@
  -->
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 <head>
-<link rel="stylesheet" type="text/css" href="../../css/style.css"
-	title="Standard" />
-<title>Aktien erfassen</title>
+<title>Benutzer erfassen</title>
 </head>
 <body>
-	<div id="mutterBox">
-		<f:view>Aktie erfassen</f:view>
-	</div>
-	<div id="meldungBox">
-		<h:outputText value="#{meldungFormBean.aktuelleMeldung}" />
-<!-- 		<h:outputText value="#{aktienFormBean.name}" /> -->
-	</div>
 
-	<div id="inhaltBox">
+<p:tabView>
+		<p:tab title="Administration">
+		<p:outputLabel  value="Benutzer erfassen"  style="font-size:30px"/>
 		<h:form>
 			<h:panelGrid>
 				<h:outputLabel for="fieldName" value="Name" />
@@ -45,6 +41,16 @@
 			<h:commandButton value="Speichern" action="#{aktienFormBean.save}" ajax="false" />
 
 		</h:form>
-	</div>
+		</p:tab>
+
+		<p:tab title="Username?">
+			<h:form>
+				<p>Wollen Sie sich abmelden?</p>
+				<p:commandButton value="Ja!" action="#{loginFormBean.logout}" />
+			</h:form>
+		</p:tab>
+	</p:tabView>
+
+		
 </body>
 </html>
