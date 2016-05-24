@@ -53,7 +53,7 @@ public class LoginFormBean {
 				if(1 == benutzer.getRolle()){
 					return "/private/admin/Admin?faces-redirect=true";
 				}
-				return "/private/haendler/Portfolio?faces-redirect=true";
+				return "/private/haendler/Haendler?faces-redirect=true";
 		} else {
 			System.out.println("User oder PW falsch");
 			return "/public/login?faces-redirect=true";

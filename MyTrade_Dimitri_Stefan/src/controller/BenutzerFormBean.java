@@ -81,7 +81,9 @@ public class BenutzerFormBean {
 	 * @return String um auf die vorherige Seite zu kommen(Admin.xhtml).
 	 */
 	public String back(){
+		System.out.println("debug test");
 		return "/private/admin/Admin?faces-redirect=true";
+		
 	}
 	
 	/**
