@@ -70,10 +70,8 @@ public class AuftragErfassenBean {
 		String auftragIds = "";
 		verkaufDao = new VerkaufDAO();
 		aktie = aktie.getAktieFromSession();
-		int[] idArray =verkaufDao.insertAuftrag(preis, aktie.getKuerzel(), anzahl);
-		for(int i=idArray.length - 1;i>=0; i--){
-			auftragIds = auftragIds + " " + idArray[i];
-		}
+		verkaufDao.insertAuftrag(preis, aktie.getKuerzel());
+		
 		
 		MeldungFormBean m = new MeldungFormBean();
 		m.setAktuelleMeldung(m.getMeldung5() + auftragIds);

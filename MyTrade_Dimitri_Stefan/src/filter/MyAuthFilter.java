@@ -49,7 +49,7 @@ public class MyAuthFilter implements Filter {
 	}
 
 
-	String loginUrl = "/MyTrade_A/faces/public/Login.xhtml";
+	String loginUrl = "/MyTrade_Dimitri_Stefan/faces/public/Login.xhtml";
 
 	boolean istLoginURL(HttpServletRequest request) {
 		String reqString = request.getRequestURI();
@@ -57,7 +57,7 @@ public class MyAuthFilter implements Filter {
 		return reqString.contains(loginUrl);
 	}
 	
-	String adminUrl = "/MyTrade_A/faces/private/admin/";
+	String adminUrl = "/MyTrade_Dimitri_Stefan/faces/private/admin/";
 	
 	boolean istAdminURL(HttpServletRequest request){
 		String reqString = request.getRequestURI();
@@ -65,7 +65,7 @@ public class MyAuthFilter implements Filter {
 		return reqString.contains(adminUrl);
 	}
 	
-String haendlerUrl = "/MyTrade_A/faces/private/haendler/";
+String haendlerUrl = "/MyTrade_Dimitri_Stefan/faces/private/haendler/";
 	
 	boolean istHaendlerURL(HttpServletRequest request){
 		String reqString = request.getRequestURI();

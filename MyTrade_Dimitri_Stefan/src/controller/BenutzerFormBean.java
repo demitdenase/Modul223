@@ -52,7 +52,6 @@ public class BenutzerFormBean {
 			benutzer.setPasswortHash(passwort);
 			benutzer.setRolle(rolle);
 			benutzer.setKontostand(10000);
-//			speichert User in DB
 			benutzerDao.insertBenutzer(benutzer);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

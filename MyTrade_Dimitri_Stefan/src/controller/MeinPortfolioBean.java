@@ -21,6 +21,30 @@ public class MeinPortfolioBean {
 	ArrayList<AktieBenutzer> list;
 	Double konto;
 	
+	public Benutzer getBenutzer() {
+		return benutzer;
+	}
+
+	public void setBenutzer(Benutzer benutzer) {
+		this.benutzer = benutzer;
+	}
+
+	public AktieDAO getAktieDAO() {
+		return aktieDAO;
+	}
+
+	public void setAktieDAO(AktieDAO aktieDAO) {
+		this.aktieDAO = aktieDAO;
+	}
+
+	public Double getKonto() {
+		return konto;
+	}
+
+	public void setKonto(Double konto) {
+		this.konto = konto;
+	}
+
 	/**
 	 * Holt den Kontostand des Users aus der Session
 	 * @return den Kontostand des angemeldeten Users

@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -12,8 +14,9 @@ public class DividendenFormBean {
 	/**
 	 * Schüttet die Dividenden aus.
 	 * @return String die Seite zu reloaden(Admin.xhtml).
+	 * @throws SQLException 
 	 */
-	public String ausschuetten() {
+	public String ausschuetten() throws SQLException {
 		BenutzerDAO benutzerDao = new BenutzerDAO();
 //		Dividenden aussch�tten
 		benutzerDao.dividendeAnBenutzer();

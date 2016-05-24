@@ -1,9 +1,4 @@
-/**
- * @author : Jason Angst
- * @date   : 03.07.2015
- * @version: 1.0
- * 
- * **/
+
 package controller;
 
 import java.sql.SQLException;
@@ -19,12 +14,20 @@ import model.Benutzer;
 
 
 
-@ManagedBean
+@ManagedBean(name="loginBean")
 @SessionScoped
 public class LoginFormBean {
+	private Benutzer benutzer;
+	public Benutzer getBenutzer() {
+		return benutzer;
+	}
 
-	private String username;
-	private String password;
+	public void setBenutzer(Benutzer benutzer) {
+		this.benutzer = benutzer;
+	}
+
+	private String benutzername;
+	private String passwortHash;
 	private BenutzerDAO jdbc;
 	FacesContext context;
 	
@@ -38,17 +41,16 @@ public class LoginFormBean {
 	 * Ruft die Login Methode im DAO auf. Und leitet den User entsprechend weiter.
 	 * @return String um auf die vorherige Seite zu kommen(mehrere M�glichkeiten).
 	 */
-	public String anmelden() {
-		Benutzer benutzer = null;
-		if (jdbc.login(username, password)) {
+	public String validate() {
+		if (jdbc.login(benutzername, passwortHash)) {
 			System.out.println("hat geklappt");
 				benutzer = new Benutzer();
-				benutzer = jdbc.getUserByLogin(username);
+				benutzer = jdbc.getUserByLogin(benutzername);
 				FacesContext facesContext = FacesContext.getCurrentInstance();
 				ExternalContext externalContext = facesContext.getExternalContext();
 				externalContext.getSessionMap().put("user", benutzer);
 //				admin
-				if(1 == benutzer.getFk_typID()){
+				if(1 == benutzer.getRolle()){
 					return "/private/admin/Admin?faces-redirect=true";
 				}
 				return "/private/haendler/Portfolio?faces-redirect=true";
@@ -59,22 +61,48 @@ public class LoginFormBean {
 		
 	
 	}
-
-	public String getUsername() {
-		return username;
+	public String logout(){
+		Benutzer benutzer = null;
+		benutzer = jdbc.getUserByLogin(benutzername);
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		externalContext.getSessionMap().put(null, null);
+		return "/public/login?faces-redirect=true";
 	}
 
-	public void setUsername(String user) {
-		this.username = user;
+	public String getBenutzername() {
+		return benutzername;
 	}
 
-	public String getPassword() {
-		return password;
+	public void setBenutzername(String benutzername) {
+		this.benutzername = benutzername;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public String getPasswortHash() {
+		return passwortHash;
 	}
+
+	public void setPasswortHash(String passwortHash) {
+		this.passwortHash = passwortHash;
+	}
+
+	public BenutzerDAO getJdbc() {
+		return jdbc;
+	}
+
+	public void setJdbc(BenutzerDAO jdbc) {
+		this.jdbc = jdbc;
+	}
+
+	public FacesContext getContext() {
+		return context;
+	}
+
+	public void setContext(FacesContext context) {
+		this.context = context;
+	}
+
+
 
 }
 

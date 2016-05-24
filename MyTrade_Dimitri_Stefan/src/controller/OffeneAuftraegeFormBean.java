@@ -23,8 +23,9 @@ public class OffeneAuftraegeFormBean {
 	 * Entweder kaufen oder stornieren, je nach dem, ob dem angemeldeten User die geklickte Aktie geh�rt oder nicht. (stornieren oder kaufen)
 	 * @param verkauf
 	 * @return String um die Seite zu reloaden(Auftraege.xhtml).
+	 * @throws SQLException 
 	 */
-	public String doAktion(Verkauf verkauf){
+	public String doAktion(Verkauf verkauf) throws SQLException{
 		verkaufDAO = new VerkaufDAO();
 		MeldungFormBean m = new MeldungFormBean();
 		//stornieren
