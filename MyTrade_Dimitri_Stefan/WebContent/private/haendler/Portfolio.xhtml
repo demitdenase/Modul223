@@ -14,44 +14,66 @@
 	<title>Mein Portfolio</title>
 </h:head>
 
-<h:body>
-	<div>
-		<h:form>
+<body>
+	<p:tabView>
+		<p:tab title="Mein Portfolio">
 
-			<h:outputLabel value="Aktueller Kontostand: " />
-			<h:outputText value="#{meinPortfolioBean.konto}" />
-			<p:dataTable value="#{meinPortfolioBean.list}" var="aktie"
-				styleClass="order-table" headerClass="order-table-header"
-				rowClasses="order-table-odd-row,order-table-even-row">
+			<h:form>
 
-				<p:column>
-					<f:facet name="header">Symbol</f:facet>
+				<h:outputLabel value="Aktueller Kontostand: " />
+				<h:outputText value="#{meinPortfolioBean.konto}" />
+				<p:dataTable value="#{meinPortfolioBean.list}" var="aktie"
+					styleClass="order-table" headerClass="order-table-header"
+					rowClasses="order-table-odd-row,order-table-even-row">
+
+					<p:column>
+						<f:facet name="header">Symbol</f:facet>
     				#{aktie.aktie.symbol}
     			</p:column>
 
-				<p:column>
-					<f:facet name="header">Aktien</f:facet>
+					<p:column>
+						<f:facet name="header">Aktien</f:facet>
     				#{aktie.aktie.name}
     			</p:column>
 
-				<p:column>
-					<f:facet name="header">Anzahl</f:facet>
+					<p:column>
+						<f:facet name="header">Anzahl</f:facet>
     				#{aktie.aktie.menge}
     			</p:column>
 
-				<p:column>
-					<f:facet name="header">Letzte Dividende (CHF)</f:facet>
+					<p:column>
+						<f:facet name="header">Letzte Dividende (CHF)</f:facet>
     				#{aktie.aktie.dividend}
     			</p:column>
 
-				<p:column>
-					<h:commandLink value="verkaufen"
-						action="#{auftragErfassenBean.verkaufen}" />
-				</p:column>
+					<p:column>
+					<f:facet name="header">Aktionen</f:facet>
+						<h:commandLink value="verkaufen"
+							action="#{auftragErfassenBean.verkaufen}" />
+					</p:column>
 
-			</p:dataTable>
-		</h:form>
-	</div>
-</h:body>
+				</p:dataTable>
+			</h:form>
+		</p:tab>
+
+		<p:tab title="Offene Aufträge">
+			<h:form>
+				<p>
+					<h1>TEST</h1>
+				</p>
+			</h:form>
+		</p:tab>
+		
+				<p:tab title="#{loginFormBean.benutzername}">
+			<h:form>
+				<p>
+					Wollen Sie sich abmelden?
+					<p:commandButton value="Ja!" action="#{loginFormBean.logout}" />
+				</p>
+			</h:form>
+		</p:tab>
+	</p:tabView>
+
+</body>
 
 </html>
