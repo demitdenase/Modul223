@@ -38,7 +38,7 @@
 
 					<p:column>
 						<f:facet name="header">Anzahl</f:facet>
-    				#{loginFormBean.menge}
+    				#{meinPortfolioBean.menge}
     			</p:column>
 
 					<p:column>
@@ -58,9 +58,34 @@
 
 		<p:tab title="Offene Aufträge">
 			<h:form>
-				<p>
-					<h1>TEST</h1>
-				</p>
+
+				<h:outputLabel value="Aktueller Kontostand: " />
+				<h:outputText value="#{meinPortfolioBean.konto}" />
+				<p:dataTable value="#{meinPortfolioBean.benutzer.aktienListe}" var="aktie"
+					styleClass="order-table" headerClass="order-table-header"
+					rowClasses="order-table-odd-row,order-table-even-row">
+
+					<p:column>
+						<f:facet name="header">Symbol</f:facet>
+    				#{aktie.symbol}
+    			</p:column>
+
+					<p:column>
+						<f:facet name="header">Aktien</f:facet>
+    				#{aktie.name}
+    			</p:column>
+
+					<p:column>
+						<f:facet name="header">Preis (CHF)</f:facet>
+    				#{aktie.preis}
+    			</p:column>
+
+					<p:column>
+						<f:facet name="header">Aktionen</f:facet>
+    				<h:commandLink value="verkaufen"
+							action="#{auftragErfassenBean.verkaufen(aktie)}" />
+    			</p:column>
+				</p:dataTable>
 			</h:form>
 		</p:tab>
 		
@@ -77,3 +102,5 @@
 </body>
 
 </html>
+
+
