@@ -85,6 +85,14 @@
     				<h:commandLink value="verkaufen"
 							action="#{auftragErfassenBean.verkaufen(aktie)}" />
     			</p:column>
+    			
+    			<ui:fragment rendered="#{order.seller.id eq homeBean.u.id}">
+						<p:commandLink value="Stornieren"></p:commandLink>
+					</ui:fragment>
+					<ui:fragment rendered="#{order.seller.id ne homeBean.u.id}">
+						<p:commandLink value="Kaufen"></p:commandLink>
+					</ui:fragment>
+    			
 				</p:dataTable>
 			</h:form>
 		</p:tab>
